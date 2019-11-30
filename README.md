@@ -4,14 +4,15 @@ uwubot is a fun discord bot with the intent of making cute comments and spreadin
 
 ## Installation
 
-Python 3 and `discord.py` library is required to run uwubot. You can install it by executing this in your Command Line/Terminal
+1. Python 3 and `discord.py` library is required to run uwubot. You can install it by executing the following line in your Command Line/Terminal:
 
 ```bash
 python3 -m pip install -U discord.py
 ```
 
-Replace the `TOKEN` variable in `uwubot.py` with your bot token (read the link below to get your own token).
-Start the main Python script by doing:
+2. Replace the `TOKEN` variable in `uwubot.py` with your bot token (read the link below to get your own token).
+
+3. Start the main Python script by doing:
 ```bash
 python3 uwubot.py
 ```
