@@ -23,6 +23,10 @@ python3 uwubot.py
 
 `!uwu` - Uwufies the newest message in a text channel
 
+`!uwuall` - Uwufies ALL incoming messages
+
+`!uwustop` - Stops uwufying all incoming messages
+
 ## Deploying
 In order to put this in your Discord server, you will have to run the `uwubot.py` Python script in a local machine first.
 I ran this in a Raspberry Pi 4B so that it was always active.

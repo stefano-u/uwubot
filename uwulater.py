@@ -49,7 +49,7 @@ def uwulate(message):
 
     return message
 
-
+# Checks if there's a period inside the message
 def check_period(message):
     if "." in message:
         return True

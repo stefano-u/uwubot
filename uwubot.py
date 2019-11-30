@@ -3,12 +3,14 @@ from uwulater import uwulate
 from discord.ext import commands
 
 # REPLACE WITH OWN TOKEN
-TOKEN = 'NjUwMzI0NDczODM2NDcwMjgy.XeJxQg.lQvg1LNXJ0pRrem9q2NF7kTvIoI'
+TOKEN = 'INSERT TOKEN HERE'
 
-client = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix="!")
+client = discord.Client()
+is_uwu = False
 
 # Command for !uwu
-@client.command()
+@bot.command()
 async def uwu(ctx):
     print("Command: !uwu")
 
@@ -22,8 +24,8 @@ async def uwu(ctx):
 
     # Last 100 messages
     message_list = await ctx.history(limit=100).flatten()
-    # print(len(message_list))
 
+    # Cycles through the list of newest 100 messages
     for message in message_list:
         if message.author.name != "uwubot" and not message.content.startswith("!uwu"):
             selected_msg = message
@@ -33,29 +35,28 @@ async def uwu(ctx):
 
             # Get the username + avatar picture of the person who sent that message
             embed_message.set_author(name=selected_msg.author.display_name,
-                                    icon_url=selected_msg.author.avatar_url)
+                                     icon_url=selected_msg.author.avatar_url)
 
             break
 
-    
     if selected_msg == None:
         embed_message.description = "Sowwy, can't find any valid text!"
 
     # Display embed message
     await ctx.channel.send(embed=embed_message)
 
+
 # Command for !uwuhelp
-@client.command()
+@bot.command()
 async def uwuhelp(ctx):
     print("Command: !uwuhelp")
 
     description = ("```----------!uwuhelp----------```\n"
-                   "Uwufy pwevious messages with\n```"
-                   "!uwu```\nUwufy aww messages with\n"
-                   "```!uwufy```\n"
-                   "and tuwn off with\n```!nouwu```\n"
+                   "Uwufy previous message with: \n```!uwu```\n"
+                   "Uwufy ALL messages with:\n```!uwuall```\n"
+                   "Stop uwufying all messages with ```!uwustop```\n"
                    "Originally created by kawaiiCirno (https://github.com/kawaiiCirno/uwubot)\n"
-                   "Modified by Stefano Gregor Unlayao (https://github.com/stefano-u/uwubot)")
+                   "Modified by stefano-u (https://github.com/stefano-u/uwubot)")
 
     embed_message = discord.Embed(
         colour=discord.Colour.blue(),
@@ -64,75 +65,77 @@ async def uwuhelp(ctx):
 
     await ctx.channel.send(embed=embed_message)
 
-# @client.event
-# async def on_message(message):
-#     global prev_msg
-#     global is_uwu
+# Command for !uwuall
+@bot.command()
+async def uwuall(ctx):
+    print("Command: !uwuall")
+    global is_uwu
+    if not is_uwu:
+        embed_message = discord.Embed(
+            colour=discord.Colour.blue(),
+            description="Uwufying ALL messages! Use `!nouwu` to disable. `ԅ(≖⌣≖ԅ)`"
+        )
+        await ctx.channel.send(embed=embed_message)
+        is_uwu = True
 
-#     # Get the username of the person that sent the message
-#     embed_message.set_author(name=message.author.display_name,
-#                              icon_url=message.author.avatar_url)
+# Command for !uwustop
+@bot.command()
+async def uwustop(ctx):
+    print("Command: !uwustop")
+    global is_uwu
+    if is_uwu:
+        embed_message = discord.Embed(
+            colour=discord.Colour.blue(),
+            description="No longer uwufying all messages! `ಠ╭╮ಠ`"
+        )
+        await ctx.channel.send(embed=embed_message)
+        is_uwu = False
 
-#     # Gets the text channel
-#     current_text_channel = message.channel
+@bot.event
+async def on_message(message):
+    await bot.process_commands(message)
+    global is_uwu
 
+    if is_uwu and message.author.name != "uwubot":
+        # Embed message to be displayed
+        embed_message = discord.Embed(
+            colour=discord.Colour.blue()
+        )
 
-#     if message.author == client.user:
-#         return
-#     ##Help
-#     if message.content.startswith('!helpuwu'):
-#         embed_message.description = help_message
-#         await message.channel.send(embed=embed_message)
-#     #Well discord doesn't support this okay
-#     #Disable uwufy mode
+        # Get last message in the channel (as Message object, not string)
+        selected_msg = None
 
-#     elif message.content.startswith('!nouwu'):
-#         is_uwu[hash(message.guild)] = False
-#         embed_message.description = "Disabling uwufy mode!"
-#         await message.channel.send(embed=embed_message)
+        # Last 100 messages
+        message_list = await message.channel.history(limit=100).flatten()
 
-#     if message.content.startswith('!uwufy'):
-#         is_uwu[hash(message.guild)] = True
-#         embed_message.description = 'Uwufying all messages! Use !nouwu to disable pls dont ( ; ω ; )'
-#         await message.channel.send(embed=embed_message)
+        # Cycles through the list of newest 100 messages
+        for message in message_list:
+            if message.author.name != "uwubot" and not message.content.startswith("!uwu"):
+                selected_msg = message
 
-#     #Check uwu mode
-#     elif hash(message.guild) in is_uwu and is_uwu[hash(message.guild)]:
-#         #await message.edit(content = uwulate(message.content))
-#         # await message.delete()
-#         channel_last_msg = current_text_channel.last_message.content
-#         embed_message.description = uwulate(channel_last_msg)
-#         await message.channel.send(embed=embed_message)
+                # Gets the contents of the message
+                embed_message.description = uwulate(message.content)
 
-#     #Uwufy previous message
-#     elif message.content.startswith('!uwu'):
-#         async for text in current_text_channel.history(limit=100):
-#             if text.author != "uwubot":
-#                 embed_message.description = uwulate(text)
-#                 # await message.channel.send(embed=embed_message)
-#                 print(embed_message.description)
-#             else:
-#                 print(f"No: " + text)
+                # Get the username + avatar picture of the person who sent that message
+                embed_message.set_author(name=selected_msg.author.display_name,
+                                            icon_url=selected_msg.author.avatar_url)
 
+                break
 
-#         # if hash(message.guild) not in prev_msg:
-#         #     embed_message.description = 'Sowwy, nyothing to uwufy uwu!'
-#         #     await message.channel.send(embed=embed_message)
-#         # else:
-#         #     uwu_message = uwulate(prev_msg[hash(message.guild)])
-#         #     # channel_last_msg = current_text_channel.last_message.content
-#         #     # embed_message.description = uwulate(channel_last_msg)
-#         #     embed_message.description = uwu_message
-#         #     await message.channel.send(embed=embed_message)
-#     # else:
-#     #     prev_msg[hash(message.guild)] = message.content
+        if selected_msg == None:
+            embed_message.description = "Sowwy, can't find any valid text!"
+
+        # Display embed message
+        await message.channel.send(embed=embed_message)
+        is_uwu2 = False
 
 
-@client.event
+
+@bot.event
 async def on_ready():
     activity = discord.Activity(
-        name='you !uwuhelp', type=discord.ActivityType.watching)
-    await client.change_presence(activity=activity)
+        name=' - !uwuhelp', type=discord.ActivityType.watching)
+    await bot.change_presence(activity=activity)
     print('uwubot starting!')
 
-client.run(TOKEN)
+bot.run(TOKEN)
