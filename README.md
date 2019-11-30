@@ -1,7 +1,6 @@
 # uwu bot
 
-uwu bot is a fun discord bot with the intent of making cute comments and spreading culture. The bot translates any previous comment into uwu language. 
-It was created originally by kawaiiCirno (https://github.com/kawaiiCirno).
+uwu bot is a fun discord bot with the intent of making cute comments and spreading culture. The bot translates any previous comment into uwu language. It was created originally by kawaiiCirno (https://github.com/kawaiiCirno).
 
 ## Installation
 
@@ -18,17 +17,11 @@ python3 uwubot.py
 ```
 
 ## Commands
-Use 
+`!uwuhelp` - Lists all commands
 
-```bash
-!uwuhelp
-```
+`!uwu` - Uwufies the newest message in a text channel
 
-to list all commands.
-
-Uwufy the newest message in a text channel with
-
-```bash
-!uwu
-```
-
+## Deploying
+In order to put this in your Discord server, you will have to run the `uwubot.py` Python script in a local machine first.
+I ran this in a Raspberry Pi 4B so that it was always active.
+Please follow the steps here to get your bot setup: https://discordpy.readthedocs.io/en/latest/discord.html.
