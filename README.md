@@ -1,11 +1,7 @@
 # uwubot
 
-<<<<<<< HEAD
 uwu bot is a fun discord bot with the intent of making cute comments and spreading culture. The bot translates any previous comment into uwu language. 
 It was originally created by kawaiiCirno (https://github.com/kawaiiCirno).
-=======
-uwubot is a fun Discord bot with the intent of making cute comments and spreading culture. The bot translates any previous comment into uwu language. It was created originally by kawaiiCirno (https://github.com/kawaiiCirno).
->>>>>>> ec78a03c93150e45f274084820b092b293c0953a
 
 ## Installation
 
