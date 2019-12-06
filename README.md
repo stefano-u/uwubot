@@ -33,4 +33,5 @@ I ran this in a Raspberry Pi 4B so that it was always active.
 Please follow the steps here to get your bot set up: https://discordpy.readthedocs.io/en/latest/discord.html.
 
 I run this program on a Raspberry Pi and run it in the background indefinitely by doing the following command in the Linux shell (make sure that the path is adjusted for your scenario):
-```nohup python3 -u /home/pi/Desktop/uwubot/uwubot.py &```
+```bash
+nohup python3 -u /home/pi/Desktop/uwubot/uwubot.py &```
