@@ -34,4 +34,5 @@ Please follow the steps here to get your bot set up: https://discordpy.readthedo
 
 I run this program on a Raspberry Pi and run it in the background indefinitely by doing the following command in the Linux shell (make sure that the path is adjusted for your scenario):
 ```bash
-nohup python3 -u /home/pi/Desktop/uwubot/uwubot.py &```
+nohup python3 -u /home/pi/Desktop/uwubot/uwubot.py &
+```
