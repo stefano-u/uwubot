@@ -3,11 +3,7 @@ from uwulater import uwulate
 from discord.ext import commands
 
 # REPLACE WITH OWN TOKEN
-<<<<<<< HEAD
-TOKEN = 'NjUwMzI0NDczODM2NDcwMjgy.XenDhg.5FHcjGL6noV6dpPUYfmM7S9gN4A'
-=======
-TOKEN = 'NjUwMzI0NDczODM2NDcwMjgy.XeLpgQ.5mdhqIEhs-kPt7H6NvymyhTpM2c'
->>>>>>> c585806cf90f087d1a6a11b550495ab6954869b4
+TOKEN = 'INSERT TOKEN HERE'
 
 bot = commands.Bot(command_prefix="!")
 client = discord.Client()

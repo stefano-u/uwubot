@@ -47,7 +47,7 @@ def uwulate(message):
     
     # Appends a uwu face if there's no period
     if not has_period:
-        message = message + " `" + random.choice(uwu_faces) + "` Test..."
+        message = message + " `" + random.choice(uwu_faces) + "`"
 
     return message
 

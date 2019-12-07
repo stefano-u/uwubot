@@ -1,0 +1,6 @@
+  File "/home/pi/Desktop/uwubot/uwubot.py", line 6
+    <<<<<<< HEAD
+     ^
+SyntaxError: invalid syntax
+uwubot starting!
+Command: !uwu
