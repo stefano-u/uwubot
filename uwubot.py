@@ -3,7 +3,7 @@ from uwulater import uwulate
 from discord.ext import commands
 
 # REPLACE WITH OWN TOKEN
-TOKEN = 'INSERT TOKEN HERE'
+TOKEN = 'NjUwMzI0NDczODM2NDcwMjgy.XenDhg.5FHcjGL6noV6dpPUYfmM7S9gN4A'
 
 bot = commands.Bot(command_prefix="!")
 client = discord.Client()
@@ -50,19 +50,16 @@ async def uwu(ctx):
 @bot.command()
 async def uwuhelp(ctx):
     print("Command: !uwuhelp")
-
     description = ("```----------!uwuhelp----------```\n"
                    "Uwufy previous message with: \n```!uwu```\n"
                    "Uwufy ALL messages with:\n```!uwuall```\n"
                    "Stop uwufying all messages with ```!uwustop```\n"
                    "Originally created by kawaiiCirno (https://github.com/kawaiiCirno/uwubot)\n"
                    "Modified by stefano-u (https://github.com/stefano-u/uwubot)")
-
     embed_message = discord.Embed(
         colour=discord.Colour.blue(),
         description=description
     )
-
     await ctx.channel.send(embed=embed_message)
 
 # Command for !uwuall
@@ -73,7 +70,7 @@ async def uwuall(ctx):
     if not is_uwu:
         embed_message = discord.Embed(
             colour=discord.Colour.blue(),
-            description="Uwufying ALL messages! Use `!nouwu` to disable. `ԅ(≖⌣≖ԅ)`"
+            description="Uwufying ALL messages! Use `!uwuall` to disable. `ԅ(≖⌣≖ԅ)`"
         )
         await ctx.channel.send(embed=embed_message)
         is_uwu = True
