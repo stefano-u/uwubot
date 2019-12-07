@@ -8,6 +8,7 @@ class WordToReplace():
 
 list_words = [
     WordToReplace("father", "daddy"),
+    WordToReplace("papa", "papi"),
     WordToReplace("dad", "daddy"),
     WordToReplace("mom", "mommy"),
     WordToReplace("mother", "mommy"),
