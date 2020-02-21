@@ -27,7 +27,7 @@ python3 uwubot.py
 
 `!uwustop` - Stops uwufying all incoming messages
 
-## Deploying
+## Hosting Yourself
 In order to put this in your Discord server, you will have to run the `uwubot.py` Python script in a local machine first.
 I ran this in a Raspberry Pi 4B so that it was always active.
 Please follow the steps here to get your bot set up: https://discordpy.readthedocs.io/en/latest/discord.html.
