@@ -3,7 +3,10 @@
 uwu bot is a fun discord bot with the intent of making cute comments and spreading culture. The bot translates any previous comment into uwu language. 
 It was originally created by kawaiiCirno (https://github.com/kawaiiCirno).
 
-## Installation
+## Inviting to Discord Server
+Invite this bot to your Discord Server here: https://top.gg/bot/650324473836470282
+
+## Installation (Manually)
 
 1. Python 3 and `discord.py` library is required to run uwubot. You can install it by executing the following line in your Command Line/Terminal:
 
