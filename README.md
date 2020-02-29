@@ -22,20 +22,13 @@ python3 uwubot.py
 ```
 
 ## Commands
-`!uwuhelp` - Lists all commands
+`!uwu help` - Lists all commands
 
-`!uwu` - Uwufies the newest message in a text channel
+`!uwu uwuify` - Uwufies the newest message in a text channel
 
-`!uwuall` - Uwufies ALL incoming messages
+`!uwu all` - Uwufies ALL incoming messages, this commands also stops it
 
-`!uwustop` - Stops uwufying all incoming messages
+`!uwu all delete` - Same as above, but replaces with the uwufied message
 
-## Hosting Yourself
-In order to put this in your Discord server, you will have to run the `uwubot.py` Python script in a local machine first.
-I ran this in a Raspberry Pi 4B so that it was always active.
-Please follow the steps here to get your bot set up: https://discordpy.readthedocs.io/en/latest/discord.html.
-
-I run this program on a Raspberry Pi and run it in the background indefinitely by doing the following command in the Linux shell (make sure that the path is adjusted for your scenario):
-```bash
-nohup python3 -u /home/pi/Desktop/uwubot/uwubot.py &
-```
+## Permissions
+uwu bot requires the two permissions, send messages and manage messages
