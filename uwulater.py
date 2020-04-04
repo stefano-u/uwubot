@@ -16,9 +16,10 @@ list_words = [
     WordToReplace("dad", "daddy", True),
     WordToReplace("mom", "mommy", True),
     WordToReplace("mother", "mommy", True),
-    WordToReplace('l', 'w', False),
-    WordToReplace('r', 'w', False),
-    WordToReplace('u', 'wu', False),
+    WordToReplace("l", "w", False),
+    WordToReplace("r", "w", False),
+    WordToReplace("u", "wu", False),
+    WordToReplace("s", "sh", False),
     WordToReplace("no", "nyo", False),
     WordToReplace("mo", "myo", False),
     WordToReplace("na", "nya", False),
@@ -41,26 +42,28 @@ uwu_faces = [
 def uwulate(message):
 
     # Replaces all periods with an "uwu" face
-    has_period = check_period(message)
-    while check_period(message):
-        message = message.replace(
-            '.', " `" + random.choice(words.uwu_faces) + "`", 1)
+    ends_period = message[len(message) - 1:] == "."
+
+    new_str = ""
+    for index, char in enumerate(message):
+        # Replace any period, not adjacent to other periods, with "uwu"
+        if char == "." and message[index - 1] != "." and message[index + 1] != ".":
+            new_str = new_str + " " + random.choice(uwu_faces)
+        # Add a "uwu" before any newline
+        elif char == "\n":
+            new_str = new_str + " " + random.choice(uwu_faces) + char
+        else:
+            new_str = new_str + char
+    message = new_str.lower()
 
     # Replace the words in the message
     message = replace_msg(message)
     
-    # Appends a uwu face if there's no period
-    if not has_period:
-        message = message + " `" + random.choice(uwu_faces) + "`"
+    # Appends a uwu face if it doesn't finish on a period
+    if not ends_period:
+        message = message + " " + random.choice(uwu_faces)
 
     return message
-
-# Checks if there's a period inside the message
-def check_period(message):
-    if "." in message:
-        return True
-    else:
-        return False
 
 # Replaces the words declared in list_words
 def replace_msg(message): 
@@ -76,5 +79,3 @@ def replace_msg(message):
             pattern = re.compile(word.old.capitalize())
             message = pattern.sub(word.new.capitalize(), message)
     return message
-
-
