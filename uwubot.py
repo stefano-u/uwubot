@@ -7,8 +7,8 @@ TOKEN = ""
 
 bot = commands.Bot(command_prefix="!uwu ")
 bot.remove_command("help")
-is_uwu = False
-delete_message = False
+is_uwu = []
+delete_message = []
 bot.embed_color = discord.Colour.blue()
 
 # Takes in a message, outputs a uwufyied(?) version of it
@@ -38,7 +38,7 @@ async def uwuify(ctx : commands.Context):
     # Cycles through the list of newest 5 messages
     for message in message_list:
         if message.author != bot.user and not message.content.startswith(bot.command_prefix):
-            await send_uwuify(message)
+            await ctx.send(uwulate(message.content))
             return
 
     embed_message.description = "Sowwy, can't find any valid text!"
@@ -47,9 +47,10 @@ async def uwuify(ctx : commands.Context):
 @bot.command()
 async def help(ctx : commands.Context):
     print("Command: !uwuhelp")
-    description = ("```----------!uwuhelp----------```\n"
+    description = ("```--------------------!uwuhelp--------------------```\n"
                    "Uwufy previous message with: \n```!uwu uwuify```\n"
                    "Uwufy ALL messages with (Toggle off with same command):\n```!uwu all```\n"
+                   "Uwufy and replace ALL messages with: \n```!uwu all replace```\n"
                    "Originally created by kawaiiCirno (https://github.com/kawaiiCirno/uwubot)\n"
                    "Modified by stefano-u (https://github.com/stefano-u/uwubot)\n"
                    "Further modified by Znunu (https://github.com/Znunu/uwubot)")
@@ -66,16 +67,16 @@ async def all(ctx : commands.Context, to_delete : str = None):
     global delete_message
 
     # Toggle on
-    if not is_uwu:
+    if not ctx.channel.id in is_uwu:
         print("Command: !uwu all toggled on")
         embed_message = discord.Embed(
             colour=bot.embed_color,
             description="Uwufying ALL messages! Use `!uwu all` to toggle off. `ԅ(≖⌣≖ԅ)`"
         )
         await ctx.channel.send(embed=embed_message)
-        is_uwu = True
-        if to_delete == "delete":
-            delete_message = True
+        is_uwu.append(ctx.channel.id)
+        if to_delete == "replace":
+            delete_message.append(ctx.channel.id)
     # Toggle off
     else:
         print("Command: !uwu all toggled off")
@@ -84,8 +85,9 @@ async def all(ctx : commands.Context, to_delete : str = None):
             description="No longer uwufying all messages! `ಠ╭╮ಠ`"
         )
         await ctx.channel.send(embed=embed_message)
-        is_uwu = False
-        delete_message = False
+        is_uwu.remove(ctx.channel.id)
+        if ctx.channel.id in delete_message:
+            delete_message.remove(ctx.channel.id)
 
 @bot.event
 async def on_message(message : discord.message):
@@ -95,10 +97,10 @@ async def on_message(message : discord.message):
     if message.content[:len(bot.command_prefix)] == bot.command_prefix and message.author != bot.user:
         await bot.process_commands(message)
     #uwuify all is on, uwuify the message
-    elif is_uwu and message.author != bot.user:
+    elif message.channel.id in is_uwu and message.author != bot.user:
         await send_uwuify(message)
         #Delete message is on, delete the message
-        if delete_message:
+        if message.channel.id in delete_message:
             await message.delete()
 
 @bot.event
